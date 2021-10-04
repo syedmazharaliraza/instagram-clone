@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <title>codedamn Project</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #fafafa;
+            width: 100%;
+            position: relative;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            background-color: #fff;
+            width: 100%;
+            height: 50px;
+            border-bottom: 1px solid #dbdbdb;
+            padding: 5px 0;
+        }
+
+        .nav-cont {
+            height: 100%;
+            width: 70%;
+            max-width: 1000px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            margin-top: 5px;
+        }
+
+        .search-box {
+            width: 180px;
+            height: 30px;
+            background-color: #fafafa;
+            position: absolute;
+            left: 45%;
+            transform: translateX(-50%);
+            border: 1px solid #dbdbdb;
+            border-radius: 5px;
+            color: #000000;
+            text-align: center;
+            text-transform: capitalize;
+        }
+
+        .search-box:focus {
+            outline: none;
+        }
+
+        .search-box::placeholder {
+            color: #808080;
+            font-weight: bold;
+        }
+
+        .nav-icons {
+            position: relative;
+            height: 22px;
+        }
+
+        .icon {
+            display: inline-block;
+            height: 100%;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        .profile-icon {
+            height: 24px;
+            border-radius: 50%;
+        }
+
+        .profile-menu {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            height: 100px;
+            width: 160px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0px 0px 16px #dbdbdb;
+            padding: 15px 20px;
+            position: relative;
+            margin-left: auto;
+            margin-top: 5px;
+        }
+
+        .profile-menu-list {
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-menu-list i {
+            margin-right: 5px;
+        }
+
+        .profile-menu hr {
+            border: 0;
+            height: 1.5px;
+            background-color: #dbdbdb;
+        }
+
+        .display-none {
+            display: none;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 50px;
+            padding: 40px 0;
+        }
+
+        .main-cont {
+            width: 70%;
+            max-width: 1000px;
+            display: grid;
+            grid-template-columns: 65% 35%;
+            grid-gap: 30px;
+        }
+
+        .left-cont {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .status-bar {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 115px;
+            background-color: #fff;
+            border: 1px solid #dbdbdb;
+            border-radius: 2px;
+            padding: 10px;
+            padding-right: 0;
+            overflow: hidden;
+            overflow-x: auto;
+        }
+
+        .status-bar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .status {
+            display: flex;
+            flex-direction: column;
+            flex: 0 0 auto;
+            align-items: center;
+            width: 80px;
+            max-width: 80px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        .profile-pic {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            padding: 3px;
+            overflow: hidden;
+            background: linear-gradient(45deg, rgb(255, 230, 0), rgb(255, 0, 128) 80%);
+        }
+
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .username {
+            width: 100%;
+            font-size: 12px;
+            font-weight: bold;
+            color: #000000;
+            text-align: center;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .post {
+            width: 100%;
+            height: 820px;
+            background-color: #fff;
+            border: 1px solid #dbdbdb;
+            margin-top: 40px;
+        }
+
+        .title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 60px;
+            padding: 0 20px;
+        }
+
+        .user-info .username {
+            width: auto;
+            color: #000000;
+            font-weight: bold;
+            font-size: 15px;
+            margin-left: 15px;
+        }
+
+        .title .options {
+            height: 10px;
+            cursor: pointer;
+        }
+
+        .title .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .title .profile-pic {
+            height: 45px;
+            width: 45px;
+            padding: 2px;
+        }
+
+        .post-img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+        }
+
+        .reactions {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 50px;
+            margin-top: -20px;
+        }
+
+        .reactions .icon {
+            height: 25px;
+            margin: 0;
+            margin-right: 15px;
+        }
+
+        .reactions .icon.save {
+            height: 28px;
+            margin-left: auto;
+            margin-right: 0;
+        }
+
+        .content {
+            width: 100%;
+            padding: 20px;
+        }
+
+        .description {
+            font-size: 14px;
+            font-weight: bold;
+            color: #4d4d4d;
+            line-height: 20px;
+            margin: 5px 0;
+        }
+
+        .description span {
+            font-weight: bold;
+            color: #000000;
+            margin-right: 5px;
+        }
+
+        .comment {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 50px;
+            border-radius: 1px solid #dbdbdb;
+        }
+
+        .comment .icon {
+            height: 30px;
+        }
+
+        .comment-box {
+            width: 80%;
+            height: 100%;
+            font-size: 14px;
+            border: none;
+            outline: none;
+        }
+
+        .comment-box::placeholder {
+            font-weight: bold;
+        }
+
+        .comment-btn,
+        .follow-btn {
+            width: 70px;
+            height: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            color: #00b2f9;
+            background: none;
+            border: none;
+            outline: none;
+            text-transform: capitalize;
+            cursor: pointer;
+        }
+
+        .right-cont {
+            padding: 20px;
+        }
+
+        .suggestion {
+            font-size: 14px;
+            color: #808080;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .profile-cont {
+            display: flex;
+            align-items: center;
+            width: 285px;
+            margin-bottom: 10px;
+        }
+
+        .profile-cont .profile-pic {
+            flex: 0 0 auto;
+            width: 70px;
+            height: 70px;
+            background: none;
+            padding: 0;
+            margin-right: 10px;
+        }
+
+        .profile-cont .username {
+            font-size: 14px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .profile-info {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .follow-stat {
+            color: #808080;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .follow-btn {
+            opacity: 1;
+            font-weight: bold;
+            font-size: 12px;
+            align-self: center;
+        }
+
+        @media (max-width: 1100px) {
+
+            .right-cont,
+            .search-box {
+                display: none;
+            }
+
+            .main-cont {
+                grid-template-columns: 100%;
+            }
+
+            .nav-cont,
+            .main-cont {
+                width: 90%;
+            }
+
+        }
+
+        @media (max-width: 500px) {
+             .nav-cont,
+            .main-cont {
+                width: 98%;
+            }
+            .nav-icons .icon {
+                margin: 0 5px;
+            }
+
+            .post-img {
+                height: 300px;
+            }
+
+            .post {
+                height: 520px;
+            }
+        }
+
+        @media (max-width: 350px) {
+            .logo {
+                height: 85%;
+            }
+
+            .nav-icons .icon {
+                height: 80%;
+                margin: 0 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-cont">
+                <img src="assets/images/logo.png" class="logo" alt="logo">
+                <input type="text" class="search-box" placeholder="search">
+                <div class="nav-icons">
+                    <img src="assets/images/home.PNG" class="icon">
+                    <img src="assets/images/messenger.PNG" class="icon">
+                    <img src="assets/images/add.PNG" class="icon">
+                    <img src="assets/images/explore.PNG" class="icon">
+                    <img src="assets/images/like.PNG" class="icon">
+                    <img src="assets/images/profile.jpg" onclick="displayMenu()" class="icon profile-icon profile-picture">
+                    <div class="profile-menu display-none">
+                        <div class="profile-menu-list">
+                            <i class="far fa-user-circle"></i>
+                            <p class="profile-option">Profile</p>
+                        </div>
+                        <hr>
+                        <p class="logout">Log Out</p>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="main-cont">
+            <section class="left-cont">
+                <div class="status-bar">
+                    <div class="status">
+                        <div class="profile-pic"><img src="assets/images/user-1.jpeg"></div>
+                        <p class="username">Zack</p>
+                    </div>
+                    <div class="status">
+                        <div class="profile-pic"><img src="assets/images/user-2.jpeg"></div>
+                        <p class="username">Cody</p>
+                    </div>
+                    <div class="status">
+                        <div class="profile-pic"><img src="assets/images/user-3.jpeg"></div>
+                        <p class="username">Monica</p>
+                    </div>
+                    <div class="status">
+                        <div class="profile-pic"><img src="assets/images/user-4.jpeg"></div>
+                        <p class="username">Joey</p>
+                    </div>
+                    <div class="status">
+                        <div class="profile-pic"><img src="assets/images/user-5.jpeg"></div>
+                        <p class="username">Chandler</p>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="title">
+                        <div class="user-info">
+                            <div class="profile-pic">
+                                <img src="assets/images/user-1.jpeg">
+                            </div>
+                            <p class="username">Zack</p>
+                        </div>
+                        <img class="options" src="assets/images/option.PNG">
+                    </div>
+                    <img class="post-img" src="assets/images/post-1.jpg">
+                    <div class="content">
+                        <div class="reactions">
+
+                            <img src="assets/images/like.PNG" class="icon">
+                            <img src="assets/images/comment.PNG" class="icon">
+                            <img src="assets/images/send.PNG" class="icon">
+                            <img src="assets/images/save.PNG" class="save icon">
+                        </div>
+                        <p class="description"><span>Zack</span>Best days of our life</p>
+                    </div>
+                    <div class="comment">
+                        <img src="assets/images/smile.PNG" class="icon">
+                        <input type="text" class="comment-box" placeholder="Add a comment">
+                        <button class="comment-btn">Post </button>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="title">
+                        <div class="user-info">
+                            <div class="profile-pic">
+                                <img src="assets/images/user-2.jpeg">
+                            </div>
+                            <p class="username">Cody</p>
+                        </div>
+                        <img class="options" src="assets/images/option.PNG">
+                    </div>
+                    <img class="post-img" src="assets/images/post-2.jpg">
+                    <div class="content">
+                        <div class="reactions">
+
+                            <img src="assets/images/like.PNG" class="icon">
+                            <img src="assets/images/comment.PNG" class="icon">
+                            <img src="assets/images/send.PNG" class="icon">
+                            <img src="assets/images/save.PNG" class="save icon">
+                        </div>
+                        <p class="description"><span>Cody</span>Nice</p>
+                    </div>
+                    <div class="comment">
+                        <img src="assets/images/smile.PNG" class="icon">
+                        <input type="text" class="comment-box" placeholder="Add a comment">
+                        <button class="comment-btn">Post </button>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="title">
+                        <div class="user-info">
+                            <div class="profile-pic">
+                                <img src="assets/images/user-3.jpeg">
+                            </div>
+                            <p class="username">Monica</p>
+                        </div>
+                        <img class="options" src="assets/images/option.PNG">
+                    </div>
+                    <img class="post-img" src="assets/images/post-3.jpg">
+                    <div class="content">
+                        <div class="reactions">
+
+                            <img src="assets/images/like.PNG" class="icon">
+                            <img src="assets/images/comment.PNG" class="icon">
+                            <img src="assets/images/send.PNG" class="icon">
+                            <img src="assets/images/save.PNG" class="save icon">
+                        </div>
+                        <p class="description"><span>Monica</span>Best place!</p>
+                    </div>
+                    <div class="comment">
+                        <img src="assets/images/smile.PNG" class="icon">
+                        <input type="text" class="comment-box" placeholder="Add a comment">
+                        <button class="comment-btn">Post </button>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="title">
+                        <div class="user-info">
+                            <div class="profile-pic">
+                                <img src="assets/images/user-4.jpeg">
+                            </div>
+                            <p class="username">Joey</p>
+                        </div>
+                        <img class="options" src="assets/images/option.PNG">
+                    </div>
+                    <img class="post-img" src="assets/images/post-4.jpg">
+                    <div class="content">
+                        <div class="reactions">
+
+                            <img src="assets/images/like.PNG" class="icon">
+                            <img src="assets/images/comment.PNG" class="icon">
+                            <img src="assets/images/send.PNG" class="icon">
+                            <img src="assets/images/save.PNG" class="save icon">
+                        </div>
+                        <p class="description"><span>Joey</span>Nice</p>
+                    </div>
+                    <div class="comment">
+                        <img src="assets/images/smile.PNG" class="icon">
+                        <input type="text" class="comment-box" placeholder="Add a comment">
+                        <button class="comment-btn">Post </button>
+                    </div>
+                </div>
+                <div class="post">
+                    <div class="title">
+                        <div class="user-info">
+                            <div class="profile-pic">
+                                <img src="assets/images/user-5.jpeg">
+                            </div>
+                            <p class="username">Chandler</p>
+                        </div>
+                        <img class="options" src="assets/images/option.PNG">
+                    </div>
+                    <img class="post-img" src="assets/images/post-5.jpg">
+                    <div class="content">
+                        <div class="reactions">
+
+                            <img src="assets/images/like.PNG" class="icon">
+                            <img src="assets/images/comment.PNG" class="icon">
+                            <img src="assets/images/send.PNG" class="icon">
+                            <img src="assets/images/save.PNG" class="save icon">
+                        </div>
+                        <p class="description"><span>Chandler</span>Nice</p>
+                    </div>
+                    <div class="comment">
+                        <img src="assets/images/smile.PNG" class="icon">
+                        <input type="text" class="comment-box" placeholder="Add a comment">
+                        <button class="comment-btn">Post </button>
+                    </div>
+                </div>
+            </section>
+            <section class="right-cont">
+                <p class="suggestion">Suggestions For You</p>
+                <div class="profile-cont">
+                    <div class="profile-pic">
+                        <img src="assets/images/user-1.jpeg">
+                    </div>
+                    <div class="profile-info">
+                        <div>
+                            <p class="username">zack</p>
+                            <p class="follow-stat">Follows You</p>
+                        </div>
+                        <button class="follow-btn">Follow</button>
+                    </div>
+                </div>
+                <div class="profile-cont">
+                    <div class="profile-pic">
+                        <img src="assets/images/user-2.jpeg">
+                    </div>
+                    <div class="profile-info">
+
+                        <div>
+                            <p class="username">Cody</p>
+                            <p class="follow-stat">Follows You</p>
+                        </div>
+                        <button class="follow-btn">Follow</button>
+                    </div>
+                </div>
+                <div class="profile-cont">
+                    <div class="profile-pic">
+                        <img src="assets/images/user-3.jpeg">
+                    </div>
+                    <div class="profile-info">
+                        <div>
+                            <p class="username">Monica</p>
+                            <p class="follow-stat">Follows You</p>
+                        </div>
+                        <button class="follow-btn">Follow</button>
+                    </div>
+                </div>
+                <div class="profile-cont">
+                    <div class="profile-pic">
+                        <img src="assets/images/user-4.jpeg">
+                    </div>
+                    <div class="profile-info">
+                        <div>
+                            <p class="username">Joey</p>
+                            <p class="follow-stat">Follows You</p>
+                        </div>
+                        <button class="follow-btn">Follow</button>
+                    </div>
+                </div>
+                <div class="profile-cont">
+                    <div class="profile-pic">
+                        <img src="assets/images/user-5.jpeg">
+                    </div>
+                    <div class="profile-info">
+                        <div>
+                            <p class="username">Chandler</p>
+                            <p class="follow-stat">Follows You</p>
+                        </div>
+                        <button class="follow-btn">Follow</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <script>
+        function displayMenu(){
+       document.querySelector(".profile-menu").classList.toggle("display-none");
+};
+    </script>
+    <script src="https://kit.fontawesome.com/1906df1c3b.js" crossorigin="anonymous"></script>
+    <script>
+        </body>
+
+</html>
